@@ -11,7 +11,8 @@ int main(){
     scanf("%d", &val2);
 
     a = ((val1 + val2) % 13) + 3;
-
+    
+    // remplace les boucles dans le code asm qui determinent si le chiffre est 3, impair et divisible par 3
     if((a % 3 == 0) && (a != 3) && (a % 2 != 0)){
         printf("le chiffre est impair, divisible par 3, mais n'est pas 3 ");
     }
