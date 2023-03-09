@@ -1,8 +1,8 @@
 .data
-etiquette1:
+etiquette_un:
 .int 1
-n:
-.long 4
+somme:
+.long 0
 formattedString:
 .ascii "%d"
 .text
@@ -19,30 +19,33 @@ mask:
 xor %eax, %eax          
 xor %ecx, %ecx
 xor %ebx, %ebx
-xor %edx, %edx
+xor %esi, %esi
 
-#mov 12(%esp), $n
-movl $n, %eax 
-movl $n, %ecx 
-jmp resultat
 
-denominateur_commun:
-sub $1, %ecx 
-mul %ecx
-cmp $0, %ecx
-je numerateur
-jmp denominateur_commun
+##prendre le n passé en paramètre dans le script en C
+movl 12(%esp), %esi
+jmp division_zero
 
-numerateur:
 
-division:
+##mettre le resultat de 1 divisé par 0! dans eax qui save le résultat de la division précédente
+division_zero:
+movl etiquette_un, %eax
+addl %eax, %ebx
+jmp approximation
+
+
+approximation:
+add $1, %ecx
+xor %edx, %edx   #mettre restant a zero car implique dans la division
+div %ecx
+addl %eax, %ebx
+cmp %esi, %ecx
+je resultat
+jmp approximation
+
 
 resultat:
-pushl $n
-pushl $formattedString
-call printf
-addl $8, %esp
-
+movl %ebx, %eax
 popl %ebx
 popl %ebp
 ret
