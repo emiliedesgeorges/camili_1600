@@ -42,7 +42,7 @@ fstps factorial
 
 valeur_e:
 flds one
-flds factorial_value
+flds factorial
 fdivrp
 flds e 
 faddp
