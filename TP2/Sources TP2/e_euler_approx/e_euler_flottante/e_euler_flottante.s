@@ -24,12 +24,13 @@ push %ebx
 
 mov iteration, %esi
 
-##initialisation des valeurs pour la factiorielle zero
-facto_zero: 
+facto_zero:
 flds one 
 fstps factorial_value 
+
 flds one 
 fstps e
+
 flds one
 fstps factorial
 
@@ -47,12 +48,10 @@ flds e
 faddp
 fstps e 
 
-##notre compteur
 sub $1, %esi 
 cmp $0, %esi
 je resultat
 
-##preparation pour la prochaine iteration
 incremente_facto_value:
 flds factorial_value
 flds one
@@ -61,8 +60,7 @@ fstps factorial_value
 jmp valeur_facto
 
 resultat:
-movl e, %eax
-
+flds e 
 pop %ebx
 pop %ebp
 ret
