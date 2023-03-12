@@ -22,7 +22,47 @@ push %ebp
 mov %esp,%ebp
 push %ebx
 
-## VOTRE CODE ICI 
+mov iteration, %esi
+
+facto_zero:
+flds one 
+fstps factorial_value 
+
+flds one 
+fstps e
+
+flds one
+fstps factorial
+
+
+## on prend pour acquis que facto 0 = 1 comme si une iteration celle de zero a deja ete fait
+valeur_facto:
+flds factorial
+flds factorial_value
+fmulp
+fstps factorial
+
+valeur_e:
+flds one
+flds factorial_value
+fdivrp
+flds e 
+faddp
+fstps e 
+
+sub $1, %esi 
+cmp $0, %esi
+je resultat
+
+incremente_facto_value:
+flds factorial_value
+flds one
+faddp
+fstps factorial_value
+jmp valeur_facto
+
+resultat:
+movl $e, %eax
 
 pop %ebx
 pop %ebp
